@@ -36,6 +36,7 @@ IB_DESIGNABLE
  *  Creates and returns a new snackbar object.
  *
  *  @param message        The message displayed on the snackbars's text label.
+ *  @param snackbarColor  The color of the snackbar.
  *  @param actionText     The text displayed on the snackbar's action button.
  *  @param duration       The duration of time for which the snackbar should remain on the screen.
  *  @param actionBlock    A block to be called when the user presses the action button.
@@ -43,6 +44,7 @@ IB_DESIGNABLE
  *
  */
 - (instancetype)initWithMessage:(NSString *)message
+                          color:(UIColor *)snackbarColor
                      actionText:(NSString *)actionText
                        duration:(NSTimeInterval)duration
                     actionBlock:(void (^)(SSSnackbar *sender))actionBlock
@@ -51,12 +53,14 @@ IB_DESIGNABLE
  *  Convenience constructor
  *
  *  @param message        The message displayed on the snackbars's text label.
+ *  @param snackbarColor  The color of the snackbar.
  *  @param actionText     The text displayed on the snackbar's action button.
  *  @param duration       The duration of time for which the snackbar should remain on the screen.
  *  @param actionBlock    A block to be called when the user presses the action button.
  *  @param dismissalBlock A block to be called when the snackbar is removed from the screen by any means other than the user having pressed the action button. Can be nil.
  */
 + (instancetype)snackbarWithMessage:(NSString *)message
+                              color:(UIColor *)snackbarColor
                          actionText:(NSString *)actionText
                            duration:(NSTimeInterval)duration
                         actionBlock:(void (^)(SSSnackbar *sender))actionBlock
