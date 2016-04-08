@@ -36,6 +36,7 @@ IB_DESIGNABLE
  *  Creates and returns a new snackbar object.
  *
  *  @param message        The message displayed on the snackbars's text label.
+ *  @param snackbarColor  The color of the snackbar.
  *  @param actionText     The text displayed on the snackbar's action button.
  *  @param duration       The duration of time for which the snackbar should remain on the screen.
  *  @param actionBlock    A block to be called when the user presses the action button.
@@ -43,6 +44,7 @@ IB_DESIGNABLE
  *
  */
 - (instancetype)initWithMessage:(NSString *)message
+                          color:(UIColor *)snackbarColor
                      actionText:(NSString *)actionText
                        duration:(NSTimeInterval)duration
                     actionBlock:(void (^)(SSSnackbar *sender))actionBlock
@@ -51,12 +53,14 @@ IB_DESIGNABLE
  *  Convenience constructor
  *
  *  @param message        The message displayed on the snackbars's text label.
+ *  @param snackbarColor  The color of the snackbar.
  *  @param actionText     The text displayed on the snackbar's action button.
  *  @param duration       The duration of time for which the snackbar should remain on the screen.
  *  @param actionBlock    A block to be called when the user presses the action button.
  *  @param dismissalBlock A block to be called when the snackbar is removed from the screen by any means other than the user having pressed the action button. Can be nil.
  */
 + (instancetype)snackbarWithMessage:(NSString *)message
+                              color:(UIColor *)snackbarColor
                          actionText:(NSString *)actionText
                            duration:(NSTimeInterval)duration
                         actionBlock:(void (^)(SSSnackbar *sender))actionBlock
@@ -75,4 +79,18 @@ IB_DESIGNABLE
  *  @param animated Determines whether the snackbars's removal from the screen is animated or not.
  */
 - (void)dismissAnimated:(BOOL)animated;
+/**
+ * Changes the color of the Snackbar's message text.
+ *
+ * @param color The new color that the message text should use.
+ */
+- (void) setMessageTextColor:(UIColor *)color;
+/**
+ * Changes the color of the Snackbar's action button text.
+ *
+ * @param color The new color that the action button text should use.
+ * @param state The button state that this text color should be applied to.
+ */
+- (void) setActionTextColor:(UIColor *)color
+                   forState:(UIControlState)state;
 @end
