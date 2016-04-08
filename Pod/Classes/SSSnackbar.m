@@ -12,6 +12,7 @@
 static SSSnackbar *currentlyVisibleSnackbar = nil;
 
 @interface SSSnackbar ()
+@property (strong, nonatomic) UIColor *snackbarColor;
 @property (strong, nonatomic) UILabel *messageLabel;
 @property (strong, nonatomic) UIButton *actionButton;
 @property (strong, nonatomic) UIView *separator;
@@ -27,12 +28,14 @@ static SSSnackbar *currentlyVisibleSnackbar = nil;
 @implementation SSSnackbar
 
 + (instancetype)snackbarWithMessage:(NSString *)message
+                              color:(UIColor *)snackbarColor
                          actionText:(NSString *)actionText
                            duration:(NSTimeInterval)duration
                         actionBlock:(void (^)(SSSnackbar *sender))actionBlock
                      dismissalBlock:(void (^)(SSSnackbar *sender))dismissalBlock {
     
     SSSnackbar *snackbar = [[SSSnackbar alloc] initWithMessage:message
+                                                         color:snackbarColor
                                                     actionText:actionText
                                                       duration:duration
                                                    actionBlock:actionBlock
@@ -42,6 +45,7 @@ static SSSnackbar *currentlyVisibleSnackbar = nil;
 }
 
 - (instancetype)initWithMessage:(NSString *)message
+                          color:(UIColor *)snackbarColor
                      actionText:(NSString *)actionText
                        duration:(NSTimeInterval)duration
                     actionBlock:(void (^)(SSSnackbar *sender))actionBlock
@@ -52,6 +56,7 @@ static SSSnackbar *currentlyVisibleSnackbar = nil;
         _actionBlock = actionBlock;
         _dismissalBlock = dismissalBlock;
         _duration = duration;
+        _snackbarColor = snackbarColor;
         
         _messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         _messageLabel.text = message;
@@ -93,7 +98,7 @@ static SSSnackbar *currentlyVisibleSnackbar = nil;
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     CGContextSaveGState(ctx);
     
-    [[UIColor colorWithWhite:0.1 alpha:0.9] setFill];
+    [_snackbarColor setFill];
     UIBezierPath *clippath = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:3];
     [clippath fill];
     
@@ -307,6 +312,15 @@ static SSSnackbar *currentlyVisibleSnackbar = nil;
     
     [self addConstraints:constraints];
     [self layoutIfNeeded];
+}
+
+- (void) setMessageTextColor:(UIColor *)color {
+    [_messageLabel setTextColor:color];
+}
+
+- (void) setActionTextColor:(UIColor *)color
+                   forState:(UIControlState)state {
+    [_actionButton setTitleColor:color forState:state];
 }
 
 @end
