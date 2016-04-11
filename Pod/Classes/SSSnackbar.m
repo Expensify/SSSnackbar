@@ -105,8 +105,8 @@ static SSSnackbar *currentlyVisibleSnackbar = nil;
     CGContextRestoreGState(ctx);
 }
 
-- (void)show {
-    UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
+- (void)show:(UIViewController *)inViewController {
+    UIViewController *topController = inViewController;
     while (topController.presentedViewController) {
         topController = topController.presentedViewController;
     }
