@@ -106,6 +106,10 @@ static SSSnackbar *currentlyVisibleSnackbar = nil;
 }
 
 - (void)show:(UIViewController *)inViewController {
+    
+    // instead of using the keywindow.rootViewController, use a passed in view controller
+    // this is because keyWindow.rootViewController is nil when we have a whisper
+    // being presented
     UIViewController *topController = inViewController;
     while (topController.presentedViewController) {
         topController = topController.presentedViewController;
